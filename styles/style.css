@@ -218,8 +218,12 @@ input{
     color:white;
     background-color: red;
  }
+ .trendInstruction li{
+    font-size:15px;
+    line-height: 1.5em;
+ }
  .uL1Container{
-    height:7em;
+    height:6.5em;
  }
   .formContainer{
     text-align:center;
