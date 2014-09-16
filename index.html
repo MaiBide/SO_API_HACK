@@ -1,0 +1,218 @@
+<!doctype html>
+    <html>
+    <head>
+    <meta charset="utf-8">
+    <title>2014 SOFTWARE TREND</title>
+
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	
+    </head>
+
+    <body>
+    <header >
+      <div id="quizHeader">
+        <img id="quizLogo" src="images/H-MIBa.jpg"><!---->
+        <h1 id="quizHeaderName">Web Front End Architect</h1>
+        <h4 id="quizHeaderPhrase">Follow the trend!</h4>
+      </div>
+    </header>
+
+    <section id="quizBody">
+      <ul id="nav">
+       <li><a id="tab1Text" href="#tab1">Introduction</a></li>
+       <li><a id="tab2Text" href="#tab2">Take Quiz</a></li>
+       <li><a id="tab3Text" href="#tab3">Quiz Results</a></li>
+       <li><a id="tab4Text" href="#tab4">Interest Trend</a></li>
+      </ul>
+      
+      <section id="tab4">
+        <div id="tabSelect4"></div>
+        <section class="tabContent"> 
+        <h2>Programming-Interest Trend</h2>
+        <div class="uL1Container">
+          <h4></h4>
+          <ul class="trendInstruction">
+            <li>The following table indicates the interest trend of programmers over a selected period of time. The trend is based on the total questions reported by Stack Overflow from it's millions of internatioal subscribers.</li>
+            <li>How to use: Select a range of languages (use cmd, Ctrl or Shift key) plus a single year; or a range of years and a single language.</li>
+           </ul>
+        </div>
+        <div class="formContainer">
+          <form class="trendInput" onsubmit="return false;">
+            <select name="lang" size="1" autofucus required multiple>
+              <option value="select" selected disabled>Select Lang</option>
+              <option value="C++">C++</option>
+              <option value="c#">C#</option>
+              <option value="c">C</option>
+              <option value="o-c">Ojective-C</option>
+              <option value="swift">Swift</option>
+              <option value="java">Java</option>
+              <option value="html">HTML</option>
+              <option value="xml">XML</option>
+              <option value="xgml">XGML</option>
+              <option value="json">JSON</option>
+              <option value="jsonp">JSONP</option>
+              <option value="javascript">JavaScript</option>
+              <option value="python">Python</option>
+              <option value="php">PHP</option>
+              <option value="ruby">Ruby</option>
+              <option value="perl">Perl</option>
+              <option value="windowsM">WindowsMobile</option>
+              <option value="OSX">OSX</option>
+              <option value="ios">iOS</option>
+              <option value="android">Android</option>
+              <option value="blackberry">Blackberry</option>
+            </select>
+            <select name="period" size="1" required multiple>
+              <option value="select" selected disabled>Select Period</option>
+              <option value="2009">2009</option>
+              <option value="2010">2010</option>
+              <option value="2011">2011</option>
+              <option value="2012">2012</option>
+              <option value="2013">2013</option>
+              <option value="2014">2014</option>
+              <!--<option value="all">all</option>-->
+            </select>
+            <!--<select name="subPeriod" size="1" required>
+              <option value="select" selected disabled>Select</option>
+              <option value="quarter">2010</option>
+              <option value="6mth">6mth</option>
+            </select>-->
+            <input class="getData" type="submit" value="Submit">
+        </div>
+        <div  class="tableContainer">
+          <table  class="trendTable">
+              <tr class="trendHeader"> 
+                <th>Lang or OS</th> 
+                <th>Interest Level</th> 
+                <!--<th># of Views</th>
+                <th>Sub Period</th>-->
+                <th>Period</th>
+              </tr>
+              
+          </table>
+        </div>
+        <!--Hidden Template of data record>-->
+        <div class="templates hidden">
+          <table class="test">
+          <tr class="trendData"> 
+              <td class="lang">Lang/OS</td> 
+              <td class="numQs"># of Qs</td>
+              <!--<td class="numViews"># of Views</td>
+              <td class="subPeriod">Sub Period</td>-->
+              <td class="period">Period</td>
+          </tr>
+          </table>
+          <div class="error">
+            <p>Uh-oh! Something went wrong with your request. Here's what we know:</p>
+          </div>
+        </div>
+        </section>
+      </section>
+      <section id="tab2">
+        <div id="tabSelect2"></div>
+        <section class="tabContent"> 
+        
+        <form id="quiz">
+        		<h2 id="quizH">Quiz</h2>
+				<div><span id="quizQNum"></span><span id="quizQ">Click Take Quiz tab to start quiz</span> </div>
+				
+				<input id="ans0" type="radio" name="Ans" value="0"><label class="ans0">Response 1</label><br>
+
+				<input id="ans1" type="radio" name="Ans" value="1"><label class="ans1">Response 2</label><br>
+
+				<input id="ans2" type="radio" name="Ans" value="2"><label class="ans2">Response 3</label><br>
+
+				<input id="ans3" type="radio" name="Ans" value="3"><label class="ans3">None of the above</label><br>
+
+             	<strong><input id="submitAns" type="submit" name="submit" value="Submit Response"></strong>
+             	<a id="nextQ" href="#tab2">Next Question</a>
+         </form>
+         <div id="Feedback"> <!--use "feedBack"-->
+         	<h2 id="inProgressFB">Feedback</h2>
+         	<div>
+         		<h4 id="corIncor"></h4>
+         		<!--<h4 id="correct">Take Quiz</h4>-->
+              	<img id="respImage" src="">
+              	<!--<span id="respImage"></span>-->
+              	<span id="corResp">Number of correct responses, so far:</span>
+              	<span id="numCorResp">0</span>
+
+         	</div>
+         </div>
+    
+        </section>
+      </section>
+      <section id="tab3">
+        <div id="tabSelect3"> </div> 
+        <section class="tabContent">
+        <h2>Quiz Results </h2>
+ 
+        <div  id="infoOnQuestions">
+        	<h3 id="quizQ0">Question 1</h3>
+        	<h5>Your response is <span id="corIncor0"></span></h5>
+        	<a id="ref0" href="">See this reference for more info</a>
+        	
+        	<h3 id="quizQ1">Question 2</h3>
+        	<h5>Your response is <span id="corIncor1"></span></h5>
+        	<a id="ref1" href="">See this reference for more info</a>
+        	
+        	<h3 id="quizQ2">Question 3</h3>
+        	<h5>Your response is <span id="corIncor2"></span></h5>
+        	<a id="ref2" href="">See this reference for more info</a>
+        	
+        	<h3 id="quizQ3">Question 4</h3>
+        	<h5>Your response is <span id="corIncor3"></span></h5>
+        	<a id="ref3" href="">See this reference for more info</a>
+        </div>
+        <h2 id:"noQuizResult"></h2>
+        <div id="quizResult"> 
+           	<!--<span id="corRespR">Number of correct responses</span>
+           	<span id="numCorRespR">3</span><span>of 4</span>-->
+           	<h4>Number of correct responses out of 4<span id="numCorRespR">0</span></h4>
+         </div> 
+         <div id="reTakeQuiz"><a  href="#tab2">Take Another Quiz</a></div>     
+        </section>
+      </section>
+
+      <section id="tab1">
+        <div id="tabSelect1"></div>
+        <section class="tabContent"> 
+        
+        <div id="bckGround">
+        	<h2>Background</h2> 
+	        <p>The purpose of this web app is to allow you to explore the past and current trends in computer programming interests. By browsing through a number of questions asked by an international group of programming learners and professionals, one can get a feel of the direction or trends of interest in computer programming languages and OSs.</p><br>
+
+          <p>Stack Overflow's website is a good location for exploring such trends. "It features questions and answers on a wide range of topics in computer programming. The website serves as a platform for users to ask and answer questions....As of April 2014, Stack Overflow has over 2,700,000 registered users and more than 7,100,000 questions." (Wipedia, Stack Overflow)</p><br> 
+
+          <p>This App, in a fairly cursory but useful way, allows you to test your knowledge about the trend  of a diverse, but technical computer programming audience. This knowledge, in turn, could, perhaps, in a small way help you to make carreer related decisions.</p>
+	        
+          <p>You could explore the current and past trends in programming by first taking the 4-question quiz (click Take Quiz tab), then explore the answers by looking at the trend data under the Interest Trend tab. (Currntly, only one quiz in pool; this is expected to increase, later.)</p><br>
+        </div>
+        <div id="instructions">
+	        <h2>Quiz Instructions</h2>
+	        <ul>
+	          <li>To take the quiz, click on the the Take Quiz tab.</li> 
+	          <li>To skip quiz and start exploring the programing trend, click Interest Trend tab</li>
+	        </ul>
+        </div>
+        <!--<div id="tab1TextB"><a  href="#tab2">Take Quiz</a></div>-->
+        </section>
+      </section>
+	</section>
+	  
+    <footer>
+      <div id="companyInfo">
+        <p class="coInfo1">Web Front-End Architect</p>
+        <p class="coInfo1">1234 Web Lane, City, State</p>
+        <p class="coInfo1">1-800-000-0000</p>
+        <a href="https://www.google.com/intl/en/about.html?fg=1" id="coEmail">
+        info@WFEA.com</a>
+        <a href="https://www.google.com/preferences?hl=en" class="coInfo2">About</a>
+        <a href="https://www.google.com/intl/en/policies/?fg=1" class="coInfo2">Privacy & Terms</a>
+      </div>
+    </footer>
+	<audio id="hadouken-sound" src="sound/hadouken.mp3">
+	<!--<script type="text/javascript" src="js/app.js"></script>-->
+</body>
+</html>
