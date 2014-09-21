@@ -1,3 +1,6 @@
+/*Author: Mai, Bide
+  Date: 9/21/14
+*/
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -222,6 +225,9 @@ input{
     font-size:15px;
     line-height: 1.5em;
  }
+ .notes{
+     font-size:13px;
+ }
  .uL1Container{
     height:6.5em;
  }
@@ -231,6 +237,12 @@ input{
 }
 .tableContainer{
     text-align:center;
+}
+.summary{
+    font-size:15px;
+    font-family:arial;
+    font-weight:lighter;
+    text-align:left;
 }
 .getData{
     width: 5em;

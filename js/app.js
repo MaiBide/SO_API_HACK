@@ -1,9 +1,9 @@
   	
 /*Author: Mai, Bide
-  Date: 9/4/14
-  subject: javascript for Thinful Quiz project
+  Date: 9/21/14
+  subject: javascript for Thinkful API HACK project
 
-  Reminders: 1) Add password 2) Add "Previous Q" button 
+  Reminders: 1)  2)   
 */
   /*-------INITIALIZATION-------*/
   /*---Global Variables ---*/
@@ -37,11 +37,12 @@
 /*Start UI execution after DOM loaded*/
 $(document).ready(function(){
 	
-  /*------PROGRAMMING-INTEREST TREND CONTROL CENTER--------*/
+  /*------STACK API HACK CONTROL CENTER--------*/
   $('.trendInput').submit( function(event){
     
     // zero out results if previous search has run
     $('.trendTable .trendData').html('');
+    $('.summary').html('');
     rec_counter=0;
     mx_periods = 1;
     mx_langs = 1;
@@ -57,6 +58,7 @@ $(document).ready(function(){
     
   });
 
+/*------QUIZ CONTROL SECTION------------*/
   //$("#tab1 section").show();//Make sure this tab is displayed first 
   $("#tab2Text").click(function(event){
       heQuiz.setupQuiz();
@@ -80,7 +82,7 @@ $(document).ready(function(){
   });
 });
 
-  /*-------NAMED FUNCTIONS-------*/
+  /*-------NAMED FUNCTIONS FOR QUIZ SECTION-------*/
     /*----Constructor Object, Properties and Methods---*/
   function Quiz () {
     //this.quizQuestion1 = quizQuestion1;
@@ -141,15 +143,6 @@ $(document).ready(function(){
       quizAnswer[3][1]= "iOS";
       quizAnswer[3][2]= "Blackberry";
       quizAnswer[3][3]= "Android";
-
-
-      
-      /*for(var i=0; i<=maxNumQ;i++){
-        quizQuestion[i] = qQ + (i+1);
-        for(var j=0; j<=maxNumQ;j++){
-            quizAnswer[i][j] = qA + (j+1);
-        };
-      };*/
     }
   };
 
@@ -321,7 +314,7 @@ $(document).ready(function(){
     $('#hadouken-sound')[0].play();
   }
 
-/*-----STACK OVERFLOW API HACK----------*/
+/*-----NAMED FUNCITONS FOR STACK OVERFLOW API-HACK SECTION----------*/
 var langs = [];
 var periods = [];
 var getData = function(tags,period,sub_period) {
@@ -344,16 +337,14 @@ var getData = function(tags,period,sub_period) {
   if(langs.length>0){//
     var frm_date =period[0]+"-01-01";//1388534400;//2014-01-01
     var to_date =period[0]+"-01-31";
+    //var mx_to_date =period[mx_periods-1]+"-01-31";
+
+  //Show summary of results
+  var summary = showSearchResults(tags, period[0], period[mx_periods-1]);
+  $('.summary').append(summary);
+
     getQuestions(tags[0],frm_date,to_date);
   }
-  /*trend: #of Qs vs time, lang/OS fixed  
-  if(periods.length>1){//trend: #of Qs vs lang, time fixed
-    var lang = langs;
-    var year = periods[i];//toString((+period[i]));
-    var frm_date = year+"-01-01";
-    var to_date = year+"-01-31";
-    getQuestions(lang,frm_date,to_date);
-  }*/
 }
 // this function takes the question object returned by StackOverflow 
 // and creates new result to be appended to DOM
@@ -363,8 +354,6 @@ var showTrend = function(record) {
   var result = $('.templates .trendData').clone();//Issue: w/o "templates", doesn't work
   
   //Set lang
- // if(mx_langs==1 && rec_counter>1) record.tag = "";//Hold param fixed
- // if(mx_periods==1 && rec_counter>=1) record.fromdate = "";
   var lang = result.find('.lang');
   lang.text(record.tag);
   //Set # of questions
@@ -375,25 +364,22 @@ var showTrend = function(record) {
    period.text(record.fromdate.substr(0,4));//toString(record), .split(",")
   //$('.trendTable').append(result);//???****Need Work?
 
-  /*// Set the question properties in result
-  var questionElem = result.find('.question-text a');
-  questionElem.attr('href', question.link);
-  questionElem.text(question.title);
-
-  // set the date asked property in result
-  var asked = result.find('.asked-date');
-  var date = new Date(1000*question.creation_date);
-  asked.text(date.toString());*/
-
   return result;
 };
 
-/*-----Gets Top Unanswered Question from StackOverflow-------*/ 
+/*-----Gets  QuestionS from StackOverflow-------*/ 
 // this function takes the results object from StackOverflow
 // and creates info about search results to be appended to DOM
-var showSearchResults = function(query, resultNum) {
-  var results = resultNum + ' results for <strong>' + query;
-  return results;
+var showSearchResults = function(tag, from_date,to_date) {
+  if(mx_langs==1&&mx_periods==1){
+    summary = "The number of " +tag[0]+ " Qs for " + from_date +" is as shown:";} 
+  else if(mx_periods==1&&mx_langs>1){
+    summary = "During "+from_date+", the number of Qs for each selection is:";
+  }
+  else if(mx_langs==1&&mx_periods>1){
+    summary = "The numbers of "+tag[0]+" Qs during "+from_date+" to "+to_date+ " are:";
+  }
+  return summary;
 };
 
 // takes error string and turns it into displayable DOM element
@@ -403,8 +389,6 @@ var showError = function(error){
   errorElem.append(errorText);
 };
 
-// takes a string of semi-colon separated tags to be searched
-// for on StackOverflow
 var getQuestions = function(tags,from_date,to_date0) {
   //Ex: questions, c++, 2014-01-01 to 2014-12-31;?filter=total 
   // the parameters we need to pass in our request to StackOverflow's API
@@ -422,18 +406,10 @@ var getQuestions = function(tags,from_date,to_date0) {
   .done(function(result){
       var trend_record = {tag:tags, num_ques:result.total, fromdate:from_date,
                 todate:to_date0};//convert an object to a var
-     // var html_elem = showTrend(trend_record);//use showQuestion(request,result);
-    /*$.each(result.items, function(i, item) {
-      var question = showQuestion(item);
-      $('.results').append(question);
-    });*/
 
     if(rec_counter<mx_total){//(rec_counter<mx_langs||rec_counter<mx_periods)
-      if(result.error_id ) trend_record.num_ques = result.error_id;
+      if(result.error_id ) trend_record.num_ques = -result.error_id;
       
-      //Run if only one tag and (regardless of how may period)
-      //var record = showTrend(trend_record);
-      //$('.trendTable').append(record);//???****Need Work?
       total[rec_counter]=trend_record.num_ques;//modify after call t Stack Xchng OK
       rec_counter++;
       
